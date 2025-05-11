@@ -11,7 +11,10 @@ class Window:
         self.Sql = SqlMethod()
         self.frame = Frame(self.root)
         self.frame.pack(padx=10, pady=10)
-        self.state = "Start"
+        if self.Sql.is_mysql_running():
+            self.state = "Close"
+        else:
+            self.state = "Start"
         
         self.Add_buttons([
             {'text': self.state, 'command': self.BootOrClose},

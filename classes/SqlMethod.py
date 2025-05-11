@@ -18,7 +18,15 @@ class SqlMethod:
                 self.process.terminate()
                 self.process.wait()
                 print("MySQL instance stopped.")
+                self.is_mysql_running()
             except Exception as e:
                 print(f"Failed to stop MySQL instance: {e}")
+        else:
+            print("No MySQL instance is running.")
+            self.is_mysql_running()
+
+    def is_mysql_running(self):
+        if self.process and self.process.poll() is None:
+            print("MySQL instance is running.")
         else:
             print("No MySQL instance is running.")
