@@ -11,7 +11,7 @@ class Window:
         self.Sql = SqlMethod()
         self.frame = Frame(self.root)
         self.frame.pack(padx=10, pady=10)
-        if self.Sql.is_mysql_running():
+        if self.Sql.detect_mysql():
             self.state = "Close"
         else:
             self.state = "Start"
@@ -40,10 +40,8 @@ class Window:
     def BootOrClose(self):
         if self.state == "Start":
             self.Sql.boot_mysql()
-            messagebox.showinfo("Info", "MySQL instance started.")
         else:
             self.Sql.close_mysql()
-            messagebox.showinfo("Info", "MySQL instance stopped.")
 
 
         self.state = "Close" if self.state == "Start" else "Start"
